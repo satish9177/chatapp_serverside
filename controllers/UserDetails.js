@@ -35,4 +35,27 @@ const updateuserdetails=async(req,res)=>{
     })
   }
 }
-module.exports={userdetails,updateuserdetails}
+const getuserdetails=async (req,res)=>{
+  try {
+    const {search}=req.body;
+    // console.log(search)
+     const check=new RegExp(search,"i","g")
+    //  console.log(check);
+     const user=await User.find({
+      '$or':[
+        {username:check},
+       { email:check}
+      ]
+     })
+     res.status(200).json({
+      message:'all users',
+      data:user
+     })
+  } catch (error) {
+    res.status(500).json({
+      message:error.message || error,
+      error:true
+    })
+  }
+}
+module.exports={userdetails,updateuserdetails,getuserdetails}

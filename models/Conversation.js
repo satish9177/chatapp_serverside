@@ -35,7 +35,12 @@ const messageSchema=new mongoose.Schema({
   seen:{
     type:String,
     default:false
-  }
+  },
+  mesgByUserId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'User',
+    require:true
+   }
 },{
   timestamps:true
 })

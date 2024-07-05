@@ -5,13 +5,14 @@ const verifytoken=async(token)=>{
    
     if(!token){
       return {
-        message:'session out'
+        message:'session out',
+        logout:true
       }
     }
       const check= await jwt.verify(token,SECRETKEY)
-      console.log(check)
+      // console.log(check)
     const user=await User.findById(check.userId).select('-password')
-    console.log(user)
+    // console.log(user)
       return user
   
 }
